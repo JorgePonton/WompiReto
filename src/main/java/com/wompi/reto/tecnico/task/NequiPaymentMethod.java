@@ -13,6 +13,7 @@ import static com.wompi.reto.tecnico.userinterfaces.InformationClient.*;
 import static com.wompi.reto.tecnico.userinterfaces.NequiInterface.*;
 import static com.wompi.reto.tecnico.userinterfaces.PaymentMethods.PAGO_CON_NEQUI;
 import static net.serenitybdd.screenplay.Tasks.instrumented;
+import static net.serenitybdd.screenplay.matchers.WebElementStateMatchers.isClickable;
 import static net.serenitybdd.screenplay.matchers.WebElementStateMatchers.isVisible;
 
 public class NequiPaymentMethod implements Task {
@@ -38,7 +39,7 @@ public class NequiPaymentMethod implements Task {
                 Click.on(USAR_EL_MISMO),
                 Click.on(ACEPTAR_TERMINOS));
 
-        actor.attemptsTo(WaitUntil.the(CONTINUAR_CON_ELPAGO, isVisible()).forNoMoreThan(50).seconds());
+        actor.attemptsTo(WaitUntil.the(CONTINUAR_CON_ELPAGO, isClickable()).forNoMoreThan(50).seconds());
 
 
         actor.attemptsTo(

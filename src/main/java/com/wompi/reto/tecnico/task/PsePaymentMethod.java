@@ -60,7 +60,7 @@ public class PsePaymentMethod implements Task {
                         Click.on(BANCO_DECLINA),
                         Click.on(ACEPTAR)
                 );
-                actor.attemptsTo(WaitUntil.the(CONTINUAR_CON_EL_PAGO_PSE, isVisible()).forNoMoreThan(50).seconds());
+                actor.attemptsTo(WaitUntil.the(CONTINUAR_CON_EL_PAGO_PSE, isClickable()).forNoMoreThan(50).seconds());
                 actor.attemptsTo(Click.on(CONTINUAR_CON_EL_PAGO_PSE));
                 actor.attemptsTo(WaitUntil.the(TRANSACCION_DECLINADA_PAGO, isVisible()).forNoMoreThan(60).seconds());
 
@@ -73,7 +73,7 @@ public class PsePaymentMethod implements Task {
                         Click.on(BANCO_ERROR),
                         Click.on(ACEPTAR)
                 );
-                actor.attemptsTo(WaitUntil.the(CONTINUAR_CON_EL_PAGO_PSE, isVisible()).forNoMoreThan(50).seconds());
+                actor.attemptsTo(WaitUntil.the(CONTINUAR_CON_EL_PAGO_PSE, isClickable()).forNoMoreThan(50).seconds());
                 actor.attemptsTo(Click.on(CONTINUAR_CON_EL_PAGO_PSE));
                 actor.attemptsTo(WaitUntil.the(TRANSACCION_FALLIDA_PAGO, isVisible()).forNoMoreThan(60).seconds());
 
