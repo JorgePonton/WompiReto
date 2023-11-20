@@ -57,7 +57,7 @@ public class QrPaymentMethod implements Task {
                         Click.on(TRANSACCION_DECLINADA_QR)
 
                 );
-                actor.attemptsTo(WaitUntil.the(CONTINUAR_CON_EL_PAGO_QR, isVisible()).forNoMoreThan(50).seconds());
+                actor.attemptsTo(WaitUntil.the(CONTINUAR_CON_EL_PAGO_QR, isClickable()).forNoMoreThan(50).seconds());
                 actor.attemptsTo(Click.on(CONTINUAR_CON_EL_PAGO_QR));
                 actor.attemptsTo(WaitUntil.the(TRANSACCION_DECLINADA_PAGO, isVisible()).forNoMoreThan(60).seconds());
 
