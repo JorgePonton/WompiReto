@@ -1,0 +1,41 @@
+plugins {
+    id 'java'
+}
+
+group 'org.example'
+version '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+
+
+dependencies {
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.8.1'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.8.1'
+    // https://mvnrepository.com/artifact/net.serenity-bdd/serenity-gradle-plugin
+    implementation group: 'net.serenity-bdd', name: 'serenity-gradle-plugin', version: '2.3.13'
+// https://mvnrepository.com/artifact/io.cucumber/cucumber-junit
+    testImplementation group: 'io.cucumber', name: 'cucumber-junit', version: '7.14.0'
+// https://mvnrepository.com/artifact/net.serenity-bdd/serenity-junit
+    implementation group: 'net.serenity-bdd', name: 'serenity-junit', version: '4.0.21'
+    testImplementation group: 'junit', name: 'junit', version: '4.12'
+    testImplementation group: 'org.assertj', name: 'assertj-core', version: '3.8.0'
+    testImplementation group: 'org.slf4j', name: 'slf4j-simple', version: '2.0.7'
+// https://mvnrepository.com/artifact/net.serenity-bdd/serenity-screenplay
+    implementation group: 'net.serenity-bdd', name: 'serenity-screenplay', version: '4.0.18'
+// https://mvnrepository.com/artifact/net.serenity-bdd/serenity-cucumber
+    testImplementation group: 'net.serenity-bdd', name: 'serenity-cucumber', version: '4.0.16'
+// https://mvnrepository.com/artifact/net.serenity-bdd/serenity-screenplay-webdriver
+    implementation group: 'net.serenity-bdd', name: 'serenity-screenplay-webdriver', version: '4.0.18'
+
+    implementation 'net.serenity-bdd:serenity-screenplay:2.0.90'
+
+    implementation 'net.serenity-bdd:serenity-junit:3.9.4'
+
+}
+
+test {
+
+}
