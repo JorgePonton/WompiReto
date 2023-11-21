@@ -15,10 +15,5 @@ steps:
   inputs:
     gradleWrapperFile: 'gradlew'
     tasks: 'clean test'
-    publishJUnitResults: true
+    publishJUnitResults: false
     testResultsFiles: '**/TEST-*.xml'
-
-- task: PublishTestResults@2
-  inputs:
-    testResultsFiles: '**/TEST-*.xml'
-    testRunTitle: 'JUnit and Cucumber Test Results'
