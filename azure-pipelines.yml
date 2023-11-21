@@ -13,7 +13,7 @@ pool:
 
 steps:
 
-- script: chmod +x ./gradlew
+
 
 - script: |
       # Descargar ChromeDriver
