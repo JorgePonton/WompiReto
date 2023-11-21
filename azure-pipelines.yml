@@ -21,16 +21,8 @@ steps:
     tasks: 'build'
     publishJUnitResults: true
     testResultsFiles: '**/TEST-*.xml'
-    javaHomeOption: 'JDKPath'  # Cambiado a 'JDKPath' para especificar la ruta del JDK
-    jdkDirectory: '/usr/lib/jvm/zulu-11-amd64'  # Actualiza la ruta del JDK según tu configuración
 
 - task: PublishTestResults@2
   inputs:
     testResultsFiles: '**/TEST-*.xml'
-    testRunTitle: 'Resultados de Pruebas'
-
-- task: PublishCodeCoverageResults@1
-  inputs:
-    codeCoverageTool: 'JaCoCo'
-    summaryFileLocation: '**/build/reports/jacoco/test/jacocoTestReport.xml'
-    reportDirectory: '**/build/jacocoHtml'
+    testRunTitle: 'JUnit Test Results'
