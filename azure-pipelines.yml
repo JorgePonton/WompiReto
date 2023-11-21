@@ -9,16 +9,17 @@ trigger:
 pool:
   vmImage: ubuntu-latest
 
+
 steps:
 - task: Gradle@3
   inputs:
     gradleWrapperFile: 'gradlew'
-    tasks: 'build'
+    tasks: 'clean test'
+    options: '-Dorg.gradle.java.home=/usr/lib/jvm/java-11-openjdk-amd64'  # Ajusta según la versión de Java
     publishJUnitResults: true
     testResultsFiles: '**/TEST-*.xml'
-    options: '-Dorg.gradle.java.home=/usr/lib/jvm/zulu-11-amd64'  # Especifica la ruta del JDK aquí
 
 - task: PublishTestResults@2
   inputs:
     testResultsFiles: '**/TEST-*.xml'
-    testRunTitle: 'JUnit Test Results'
+    testRunTitle: 'JUnit and Cucumber Test Results'
