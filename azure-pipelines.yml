@@ -15,7 +15,6 @@ steps:
   inputs:
     gradleWrapperFile: 'gradlew'
     tasks: 'clean test'
-    options: '-Dorg.gradle.java.home=/usr/lib/jvm/java-11-openjdk-amd64'  # Ajusta según la versión de Java
     publishJUnitResults: true
     testResultsFiles: '**/TEST-*.xml'
 
