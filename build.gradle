@@ -1,3 +1,4 @@
+
 plugins {
     id 'java'
 }
@@ -10,6 +11,17 @@ repositories {
 }
 
 
+apply plugin: 'java'
+apply plugin: 'idea'
+apply plugin: 'eclipse'
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+
+tasks.withType(JavaCompile) {
+    options.encoding = 'UTF-8'
+}
 
 dependencies {
     testImplementation 'org.junit.jupiter:junit-jupiter-api:5.8.1'
@@ -37,10 +49,12 @@ dependencies {
 }
 
 test {
+    testLogging.showStandardStreams = true
+    systemProperties System.getProperties()
 
 }
-
-java {
-    sourceCompatibility = JavaVersion.VERSION_17
-    targetCompatibility = JavaVersion.VERSION_17
+tasks.withType(JavaCompile) {
+    options.encoding('UTF-8')
 }
+
+gradle.startParameter.continueOnFailure = true
