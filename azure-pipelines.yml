@@ -3,6 +3,7 @@
 # Add steps that analyze code, save build artifacts, deploy, and more:
 # https://docs.microsoft.com/azure/devops/pipelines/languages/java
 
+
 trigger:
 - main
 
@@ -17,52 +18,14 @@ steps:
     CHROMEDRIVER_URL="https://chromedriver.storage.googleapis.com/$CHROMEDRIVER_VERSION/chromedriver_linux64.zip"
     wget $CHROMEDRIVER_URL -O chromedriver.zip
     unzip chromedriver.zip
-    echo "export webdriver.chrome.driver=$(Agent.BuildDirectory)/s/chromedriver" >> $(Agent.TempDirectory)/chromedriver-env
+    echo "export webdriver.chrome.driver=$(Agent.BuildDirectory)/s/chromedriver" > $(Agent.TempDirectory)/chromedriver-env
   displayName: 'Download and configure ChromeDriver'
 
 - script: |
-    javac MyChromeDriver.java  # Compilar tu clase si es necesario
-    . $(Agent.TempDirectory)/chromedriver-env  # Usar el punto en lugar de source
-    java MyChromeDriver        # Ejecutar tu clase
-  displayName: 'Run ChromeDriver'
-
-- script: |
-    . $(Agent.TempDirectory)/chromedriver-env  # Usar el punto en lugar de source
-    public class MyChromeDriver {
-    private static WebDriver chromeDriver;
-
-
-    public static MyChromeDriver chromeHisBrowserWeb() 
-    {
-        ChromeOptions options = new ChromeOptions();
-
-        options.addArguments("--incognito");
-
-        options.addArguments("--start-maximized");
-
-        options.addArguments("--ignore-certificate-errors");
-
-        options.addArguments("--disable-infobars");
-
-        options.addArguments("--remote-allow-origins=*");
-
-        chromeDriver = new ChromeDriver(options);
-        return new MyChromeDriver();
-
-
-    }
-
-
-    public WebDriver onTheUrl(String url){
-        chromeDriver.get(url);
-        return chromeDriver;
-    }
-
-
-    }
-
-    java -jar YourTestProject.jar
-  displayName: 'Run Tests'
+    . $(Agent.TempDirectory)/chromedriver-env
+    javac MyChromeDriver.java
+    java MyChromeDriver
+  displayName: 'Compile and Run MyChromeDriver'
 
 - task: JavaToolInstaller@0
   inputs:
