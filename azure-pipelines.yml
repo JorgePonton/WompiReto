@@ -14,6 +14,7 @@ steps:
 - script: chmod +x ./gradlew
 
 - script: |
+    ls  # Agrega este comando para verificar la presencia del archivo MyChromeDriver.java
     # Descargar ChromeDriver
     CHROMEDRIVER_URL="https://chromedriver.storage.googleapis.com/$CHROMEDRIVER_VERSION/chromedriver_linux64.zip"
     wget $CHROMEDRIVER_URL -O chromedriver.zip
@@ -24,8 +25,8 @@ steps:
 - script: |
     export CHROME_DRIVER_PATH=$(cat $(Agent.TempDirectory)/chromedriver-env)
     export CLASSPATH=$CHROME_DRIVER_PATH:$CLASSPATH
-    javac MyChromeDriver.java
-    java MyChromeDriver
+    javac java/com/wompi/reto/tecnico/utils/MyChromeDriver.java
+    java java/com/wompi/reto/tecnico/utils/MyChromeDriver
   displayName: 'Compile and Run MyChromeDriver'
 
 - task: JavaToolInstaller@0
