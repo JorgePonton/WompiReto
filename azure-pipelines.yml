@@ -12,9 +12,7 @@ pool:
 
 
 steps:
-- script: |
-    ./gradlew clean build
-  displayName: 'Run Gradle Locally'
+
 - task: JavaToolInstaller@0
   inputs:
     versionSpec: '17'
