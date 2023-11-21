@@ -25,7 +25,7 @@ steps:
     export CHROME_DRIVER_PATH=$(cat $(Agent.TempDirectory)/chromedriver-env)
     export CLASSPATH=$CHROME_DRIVER_PATH:$CLASSPATH
     javac java/com/wompi/reto/tecnico/utils/MyChromeDriver.java
-    java java/com/wompi/reto/tecnico/utils/MyChromeDriver
+    java java/com/wompi/reto/tecnico/utils/MyChromeDriver.java
   displayName: 'Compile and Run MyChromeDriver'
 
 - task: JavaToolInstaller@0
