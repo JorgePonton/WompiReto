@@ -18,11 +18,12 @@ steps:
     CHROMEDRIVER_URL="https://chromedriver.storage.googleapis.com/$CHROMEDRIVER_VERSION/chromedriver_linux64.zip"
     wget $CHROMEDRIVER_URL -O chromedriver.zip
     unzip chromedriver.zip
-    echo "export webdriver.chrome.driver=$(Agent.BuildDirectory)/s/chromedriver" > $(Agent.TempDirectory)/chromedriver-env
-  displayName: 'Download and configure ChromeDriver'
+    echo "webdriver.chrome.driver=$(Agent.BuildDirectory)/s/chromedriver" > $(Agent.TempDirectory)/chromedriver-env
+  displayName: 'Download ChromeDriver'
 
 - script: |
-    . $(Agent.TempDirectory)/chromedriver-env
+    export CHROME_DRIVER_PATH=$(cat $(Agent.TempDirectory)/chromedriver-env)
+    export CLASSPATH=$CHROME_DRIVER_PATH:$CLASSPATH
     javac MyChromeDriver.java
     java MyChromeDriver
   displayName: 'Compile and Run MyChromeDriver'
