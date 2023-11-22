@@ -4,38 +4,50 @@
 # https://docs.microsoft.com/azure/devops/pipelines/languages/java
 
 trigger:
-- main
+  - main
 
 pool:
   vmImage: ubuntu-latest
 
 steps:
-- script: chmod +x ./gradlew
+  - script: chmod +x ./gradlew
 
-- script: |
-    ls  # Agrega este comando para verificar la presencia del archivo MyChromeDriver.java
-    # Descargar ChromeDriver
+  - script: |
+    # Verify the presence of the MyChromeDriver.java file
+    ls
+    # Download ChromeDriver
     CHROMEDRIVER_URL="https://chromedriver.storage.googleapis.com/$CHROMEDRIVER_VERSION/chromedriver_linux64.zip"
     wget $CHROMEDRIVER_URL -O chromedriver.zip
     unzip chromedriver.zip
     echo "webdriver.chrome.driver=$(Agent.BuildDirectory)/s/chromedriver" > $(Agent.TempDirectory)/chromedriver-env
+
   displayName: 'Download ChromeDriver'
 
+  - task: JavaToolInstaller@0
+    inputs:
+      versionSpec: '17'
+      jdkArchitectureOption: 'x64'
+      jdkSourceOption: 'PreInstalled'
 
-- task: JavaToolInstaller@0
-  inputs:
-    versionSpec: '17'
-    jdkArchitectureOption: 'x64'
-    jdkSourceOption: 'PreInstalled'
+  - task: Gradle@3
+    inputs:
+      gradleWrapperFile: 'gradlew'
+      tasks: 'test'  # Change 'build' to 'test' to execute the tests
+      publishJUnitResults: false
+      codeCoverageClassFilesDirectories: 'build/classes/main/'
+      javaHomeOption: 'JDKVersion'
+      sonarQubeRunAnalysis: true
+      sqGradlePluginVersionChoice: 'specify'
+      sonarQubeGradlePluginVersion: '2.6.1'
+      spotBugsAnalysis: false
 
-- task: Gradle@3
-  inputs:
-    gradleWrapperFile: 'gradlew'
-    tasks: 'build'
-    publishJUnitResults: false
-    codeCoverageClassFilesDirectories: 'build/classes/main/'
-    javaHomeOption: 'JDKVersion'
-    sonarQubeRunAnalysis: true
-    sqGradlePluginVersionChoice: 'specify'
-    sonarQubeGradlePluginVersion: '2.6.1'
-    spotBugsAnalysis: false
+  - script: |
+    # Set the system property to use the downloaded ChromeDriver
+    System.setProperty("webdriver.chrome.driver", "$(Agent.TempDirectory)/chromedriver");
+  displayName: 'Set Chrome Driver Property'
+
+  - task: VSTest@2
+    inputs:
+      testAssemblyPath: '**\*.dll'
+      publishRunnings: true
+      searchFolder: '$(Agent.BuildDirectory)'
