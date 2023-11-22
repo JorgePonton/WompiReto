@@ -5,6 +5,8 @@
 trigger:
   - main
 
+variables:
+  CHROMEDRIVER_VERSION: '91.0.4472.101'  
 pool:
   vmImage: ubuntu-latest
 
@@ -15,11 +17,10 @@ steps:
     # Verify the presence of the MyChromeDriver.java file
     ls
     # Download ChromeDriver
-    CHROMEDRIVER_URL="https://chromedriver.storage.googleapis.com/$CHROMEDRIVER_VERSION/chromedriver_linux64.zip"
+    CHROMEDRIVER_URL="https://chromedriver.storage.googleapis.com/$(CHROMEDRIVER_VERSION)/chromedriver_linux64.zip"
     wget $CHROMEDRIVER_URL -O chromedriver.zip
     unzip chromedriver.zip
     echo "webdriver.chrome.driver=$(Agent.BuildDirectory)/s/chromedriver" > $(Agent.TempDirectory)/chromedriver-env
-
   displayName: 'Download ChromeDriver'
 
   - task: JavaToolInstaller@0
