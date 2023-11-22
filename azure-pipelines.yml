@@ -2,11 +2,13 @@
 # Build your Java project and run tests with Gradle using a Gradle wrapper script.
 # Add steps that analyze code, save build artifacts, deploy, and more:
 # https://docs.microsoft.com/azure/devops/pipelines/languages/java
+
 trigger:
   - main
 
 variables:
-  CHROMEDRIVER_VERSION: '91.0.4472.101'  
+  CHROMEDRIVER_VERSION: '91.0.4472.101'  # Reemplaza esto con la versión que necesitas
+
 pool:
   vmImage: ubuntu-latest
 
@@ -14,14 +16,14 @@ steps:
   - script: chmod +x ./gradlew
 
   - script: |
-    # Verify the presence of the MyChromeDriver.java file
-    ls
-    # Download ChromeDriver
-    CHROMEDRIVER_URL="https://chromedriver.storage.googleapis.com/$(CHROMEDRIVER_VERSION)/chromedriver_linux64.zip"
-    wget $CHROMEDRIVER_URL -O chromedriver.zip
-    unzip chromedriver.zip
-    echo "webdriver.chrome.driver=$(Agent.BuildDirectory)/s/chromedriver" > $(Agent.TempDirectory)/chromedriver-env
-  displayName: 'Download ChromeDriver'
+      # Verify the presence of the MyChromeDriver.java file
+      ls
+      # Download ChromeDriver
+      CHROMEDRIVER_URL="https://chromedriver.storage.googleapis.com/$(CHROMEDRIVER_VERSION)/chromedriver_linux64.zip"
+      wget $CHROMEDRIVER_URL -O chromedriver.zip
+      unzip chromedriver.zip
+      echo "webdriver.chrome.driver=$(Agent.BuildDirectory)/s/chromedriver" > $(Agent.TempDirectory)/chromedriver-env
+    displayName: 'Download ChromeDriver'
 
   - task: JavaToolInstaller@0
     inputs:
@@ -42,6 +44,7 @@ steps:
       spotBugsAnalysis: false
 
   - script: |
-    # Set the system property to use the downloaded ChromeDriver
-    export WEBDRIVER_CHROME_DRIVER=$(Agent.TempDirectory)/chromedriver
-  displayName: 'Set Chrome Driver Property'
+      # Set the system property to use the downloaded ChromeDriver
+      export WEBDRIVER_CHROME_DRIVER=$(Agent.TempDirectory)/chromedriver
+    displayName: 'Set Chrome Driver Property'
+
