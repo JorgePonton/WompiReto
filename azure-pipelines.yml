@@ -15,13 +15,11 @@ steps:
   - script: |
     # Verify the presence of the MyChromeDriver.java file
     ls
-    # Download ChromeDriver
     CHROMEDRIVER_URL="https://chromedriver.storage.googleapis.com/$CHROMEDRIVER_VERSION/chromedriver_linux64.zip"
     wget $CHROMEDRIVER_URL -O chromedriver.zip
     unzip chromedriver.zip
     echo "webdriver.chrome.driver=$(Agent.BuildDirectory)/s/chromedriver" > $(Agent.TempDirectory)/chromedriver-env
-
-  displayName: 'Download ChromeDriver'
+    displayName: 'Download ChromeDriver'
 
   - task: JavaToolInstaller@0
     inputs:
