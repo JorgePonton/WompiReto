@@ -1,8 +1,0 @@
-
-Z	java:S106P"9Replace this use of System.out or System.err by a logger.(–üÉ­ıÿÿÿÿ8êË…è¾1
-€
-java:S1128"^Remove this unused import 'com.wompi.reto.tecnico.userinterfaces.PaymentMethods.PAGO_CON_PSE'.(„œŒ—üÿÿÿÿ8áûÉè¾1
-j
-java:S1128"MRemove this unused import 'com.wompi.reto.tecnico.userinterfaces.PsePayment'.(¶ÛÙ8áûÉè¾1
-‰
-java:S1128"gRemove this unused import 'com.wompi.reto.tecnico.userinterfaces.PsePayment.CONTINUAR_CON_EL_PAGO_PSE'.(¡•æ¨øÿÿÿÿ8áûÉè¾1
